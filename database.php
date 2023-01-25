@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "MYsql10#$";
-$database = "";
+$database = "vacanties";
 $port = 3308;
 
 // Create connection

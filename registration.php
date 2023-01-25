@@ -70,27 +70,23 @@
 </form>
 
 <?php
-include 'database.php';
+include_once 'database.php';
 global $conn;
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $formValid = true;
-    $firstname = test_input($_POST["firstName"]);
-    $lastName  = test_input($_POST["lastName"]);
-    $email = test_input($_POST["email"]);
-    $region = test_input($_POST["region"]);
-    $industry = test_input($_POST["industry"]);
-    $jobPosition = test_input($_POST["jobPosition"]);
-    $desiredSalary = test_input($_POST["desiredSalary"]);
-    if (empty($firstname) || empty($lastName) || empty($email) || empty($region) || empty($industry) || empty($jobPosition || empty($desiredSalary))){
-        $formValid =false;
-        echo "Invalid Input";
-    } else {
-// Alternatieve manier
+
         $stm = $conn->prepare("INSERT INTO registrations (firstName, lastName, email, region, industry, jobPosition, desiredSalary) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stm->bind_param("ssssssi", $firstname, $lastName, $email, $region, $industry, $jobPosition, $desiredSalary);
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $formValid = true;
+            $firstname = test_input($_POST["firstName"]);
+            $lastName  = test_input($_POST["lastName"]);
+            $email = test_input($_POST["email"]);
+            $region = test_input($_POST["region"]);
+            $industry = test_input($_POST["industry"]);
+            $jobPosition = test_input($_POST["jobPosition"]);
+            $desiredSalary = test_input($_POST["desiredSalary"]);
         $stm->execute();
 
-    }
 }
 function test_input($data) {
     $data = trim($data);
