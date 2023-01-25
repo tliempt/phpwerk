@@ -85,6 +85,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $formValid =false;
         echo "Invalid Input";
     } else {
+// Alternatieve manier
+        $stm = $conn->prepare("INSERT INTO registrations (firstName, lastName, email, region, industry, jobPosition, desiredSalary) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stm->bind_param("ssssssi", $firstname, $lastName, $email, $region, $industry, $jobPosition, $desiredSalary);
+        $stm->execute();
 
     }
 }
