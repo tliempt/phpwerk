@@ -3,7 +3,7 @@
 <body>
 <style>
     body {
-        font-family: Arial;
+        font-family: "Arial Black";
     }
 
     input[type=text], select {
@@ -37,7 +37,8 @@
         padding: 20px;
     }
 </style>
-<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+<form
+        method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
     Name: <label><label>
         <input type="text" name="firstName">
         Last Name: <label></label>
@@ -69,26 +70,22 @@
 </form>
 
 <?php
+include 'database.php';
+global $conn;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $formValid = true;
     $firstname = test_input($_POST["firstName"]);
-    $firstname = test_input($_POST["lastName"]);
-    $firstname = test_input($_POST["email"]);
-    $firstname = test_input($_POST["region"]);
-    $firstname = test_input($_POST["industry"]);
-    $firstname = test_input($_POST["jobPosition"]);
-    $firstname = test_input($_POST["desiredSalary"]);
-    if (empty($firstname))
-        if (empty($lastName))
-            if (empty($email))
-                if (empty($region))
-                    if (empty($industry))
-                        if (empty($jopPosition))
-                            if (empty($desiredSalary)){
+    $lastName  = test_input($_POST["lastName"]);
+    $email = test_input($_POST["email"]);
+    $region = test_input($_POST["region"]);
+    $industry = test_input($_POST["industry"]);
+    $jobPosition = test_input($_POST["jobPosition"]);
+    $desiredSalary = test_input($_POST["desiredSalary"]);
+    if (empty($firstname) || empty($lastName) || empty($email) || empty($region) || empty($industry) || empty($jobPosition || empty($desiredSalary))){
         $formValid =false;
         echo "Invalid Input";
     } else {
-        echo $firstname;
+
     }
 }
 function test_input($data) {
