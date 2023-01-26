@@ -73,8 +73,8 @@
 include_once 'database.php';
 global $conn;
 
-$stm = $conn->prepare("INSERT INTO vacancyid (company, email, region, industry, jobPosition, startSalary, endSalary) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-$stm->bind_param("isssssi", $company, $email, $region, $industry, $jobPosition, $startSalary, $endSalary);
+$stm = $conn->prepare("INSERT INTO vacanies (company, email, region, industry, jobPosition, startSalary, endSalary) VALUES (?, ?, ?, ?, ?, ?, ?)");
+$stm->bind_param("sssssii", $company, $email, $region, $industry, $jobPosition, $startSalary, $endSalary);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $formValid = true;
