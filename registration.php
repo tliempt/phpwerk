@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $desiredSalary = test_input($_POST["desiredSalary"]);
     if (empty($firstname) || empty($lastName) || empty($email) || empty($region) || empty($industry) || empty($jobPosition || empty($desiredSalary))){
         $formValid =false;
-        echo "Invalid Input";
+        echo "Bedankt voor het inzenden!";
     } else {
         echo $firstname;
     }
