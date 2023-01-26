@@ -39,9 +39,7 @@
 </style>
 <form
     method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-    Vacany ID: <label><label>
-            <input type="text" name="vacancyid" required>
-            Company: <label></label>
+    Company: <label><label>
             <input type="text" name="company" required>
             Email: <label></label>
             <input type="text" name="email" required>
@@ -75,12 +73,11 @@
 include_once 'database.php';
 global $conn;
 
-$stm = $conn->prepare("INSERT INTO vacancyid (vacancyid, company, email, region, industry, jobPosition, startSalary, endSalary) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-$stm->bind_param("isssssi", $vacancyid, $company, $email, $region, $industry, $jobPosition, $startSalary, $endSalary);
+$stm = $conn->prepare("INSERT INTO vacancyid (company, email, region, industry, jobPosition, startSalary, endSalary) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$stm->bind_param("isssssi", $company, $email, $region, $industry, $jobPosition, $startSalary, $endSalary);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $formValid = true;
-    $vacancyid = test_input($_POST["vacancyid"]);
     $company = test_input($_POST["company"]);
     $email = test_input($_POST["email"]);
     $region = test_input($_POST["region"]);
@@ -88,11 +85,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $jobPosition = test_input($_POST["jobPosition"]);
     $startSalary = test_input($_POST["startSalary"]);
     $endSalary = test_input($_POST["endSalary"]);
-    if (empty($vacanyid) || empty($company) || empty($email) || empty($region) || empty($industry) || empty($jobPosition || empty($startSalary) || empty($endSalary))){
+    if (empty($company) || empty($email) || empty($region) || empty($industry) || empty($jobPosition || empty($startSalary) || empty($endSalary))){
         $formValid =false;
         echo "Invalid Input";
     } else {
-        echo $vacancyid;
+        echo $company;
     }
     $stm->execute();
     $stm->close();
