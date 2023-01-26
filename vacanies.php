@@ -18,7 +18,7 @@
 
     input[type=submit] {
         width: 100%;
-        background-color: #ffae00;
+        background-color: #af0000;
         color: white;
         padding: 14px 20px;
         margin: 8px 0;
@@ -28,7 +28,7 @@
     }
 
     input[type=submit]:hover {
-        background-color: #a27101;
+        background-color: #540000;
     }
 
     div.container {
@@ -38,13 +38,13 @@
     }
 </style>
 <form
-        method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-    Name: <label><label>
-        <input type="text" name="firstName" required>
-        Last Name: <label></label>
-        <input type="text" name="lastName" required>
-        Email: <label></label>
-        <input type="text" name="email" required>
+    method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+    Vacany ID: <label><label>
+            <input type="text" name="vacancyid" required>
+            Company: <label></label>
+            <input type="text" name="company" required>
+            Email: <label></label>
+            <input type="text" name="email" required>
             <label for="region">Region</label>
             <select id="region" name="region" required>
                 <option value="Friesland">Friesland</option>
@@ -60,36 +60,39 @@
                 <option value="Groningen">Groingen</option>
                 <option value="Utrecht">Utrecht</option>
             </select>
-        Industry: <label></label>
-        <input type="text" name="industry" required>
-        Job Position: <label></label>
+            Industry: <label></label>
+            <input type="text" name="industry" required>
+            Job Position: <label></label>
             <input type="text" name="jobPosition" required>
-            Desired Salary: <label></label>
-            <input type="text" name="desiredSalary" required>
-    <input type="submit">
+            Starting Salary: <label></label>
+            <input type="text" name="startSalary" required>
+            End Salary: <label></label>
+            <input type="text" name="endSalary" required>
+            <input type="submit">
 </form>
 
 <?php
 include_once 'database.php';
 global $conn;
 
-$stm = $conn->prepare("INSERT INTO registrations (firstName, lastName, email, region, industry, jobPosition, desiredSalary) VALUES (?, ?, ?, ?, ?, ?, ?)");
-$stm->bind_param("ssssssi", $firstname, $lastName, $email, $region, $industry, $jobPosition, $desiredSalary);
+$stm = $conn->prepare("INSERT INTO vacancyid (vacancyid, company, email, region, industry, jobPosition, startSalary, endSalary) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$stm->bind_param("isssssi", $vacancyid, $company, $email, $region, $industry, $jobPosition, $startSalary, $endSalary);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $formValid = true;
-    $firstname = test_input($_POST["firstName"]);
-    $lastName  = test_input($_POST["lastName"]);
+    $vacancyid = test_input($_POST["vacancyid"]);
+    $company = test_input($_POST["company"]);
     $email = test_input($_POST["email"]);
     $region = test_input($_POST["region"]);
     $industry = test_input($_POST["industry"]);
     $jobPosition = test_input($_POST["jobPosition"]);
-    $desiredSalary = test_input($_POST["desiredSalary"]);
-    if (empty($firstname) || empty($lastName) || empty($email) || empty($region) || empty($industry) || empty($jobPosition || empty($desiredSalary))){
+    $startSalary = test_input($_POST["startSalary"]);
+    $endSalary = test_input($_POST["endSalary"]);
+    if (empty($vacanyid) || empty($company) || empty($email) || empty($region) || empty($industry) || empty($jobPosition || empty($startSalary) || empty($endSalary))){
         $formValid =false;
         echo "Invalid Input";
     } else {
-        echo $firstname;
+        echo $vacancyid;
     }
     $stm->execute();
     $stm->close();
