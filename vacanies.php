@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $formValid =false;
         echo "Invalid Input";
     } else {
-        echo $company;
+        echo "Bedankt voor het inzenden!";
     }
     $stm->execute();
     $stm->close();
