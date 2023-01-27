@@ -3,7 +3,7 @@
 <body>
 <style>
     body {
-        font-family: "Arial Black";
+        font-family: "Arial Black", serif;
     }
 
     input[type=text], select {
